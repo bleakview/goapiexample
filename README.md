@@ -1,3 +1,5 @@
+[![Go CI](https://github.com/bleakview/goapiexample/actions/workflows/go_ci.yml/badge.svg)](https://github.com/bleakview/goapiexample/actions/workflows/go_ci.yml)   [![publish to docker registry](https://github.com/bleakview/goapiexample/actions/workflows/push_to_docker_hub.yml/badge.svg)](https://github.com/bleakview/goapiexample/actions/workflows/push_to_docker_hub.yml)
+
 # GOApiExample
 
 Hi ! This is an example written in golang for a start point on how to write a Gorilla with Gorm.
