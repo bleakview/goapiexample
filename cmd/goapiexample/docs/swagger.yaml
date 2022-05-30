@@ -1,0 +1,131 @@
+definitions:
+  model.Book:
+    properties:
+      author:
+        type: string
+      id:
+        type: string
+      isbn:
+        type: string
+      name:
+        type: string
+      release_year:
+        type: integer
+    type: object
+  model.BookRequest:
+    properties:
+      author:
+        type: string
+      isbn:
+        type: string
+      name:
+        type: string
+      release_year:
+        type: integer
+    type: object
+info:
+  contact:
+    name: Mustafa Unal
+    url: https://github.com/bleakview/
+  description: |-
+    <br>
+    <br>
+    This API handles books operations.
+    <br>
+    ## Operations
+    <br>
+    With this API you can:
+    <br>
+    * **Create book**
+    * **Update book**
+    * **Get all books**
+    * **Get specific book with {id}**
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Books DB application
+  version: 1.0.0
+paths:
+  /books:
+    get:
+      consumes:
+      - application/json
+      description: Get all recorded books
+      operationId: GetAllBooks
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Book array
+          schema:
+            items:
+              $ref: '#/definitions/model.Book'
+            type: array
+      summary: Gets all books
+  /books/:
+    post:
+      consumes:
+      - application/json
+      description: Create single book with given parameters
+      operationId: CreateBook
+      parameters:
+      - description: Book data
+        in: body
+        name: book
+        required: true
+        schema:
+          $ref: '#/definitions/model.BookRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Create Book
+  /books/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Gets a single book by id
+      operationId: GetBookById
+      parameters:
+      - description: Book id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: found book
+          schema:
+            $ref: '#/definitions/model.Book'
+      summary: Gets a book
+    put:
+      consumes:
+      - application/json
+      description: Update book with give id
+      operationId: UpdateBook
+      parameters:
+      - description: Book id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Book data
+        in: body
+        name: book
+        required: true
+        schema:
+          $ref: '#/definitions/model.BookRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Update book
+swagger: "2.0"

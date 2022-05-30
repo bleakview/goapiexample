@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  golang:
+    image: goapiexample:latest
+    container_name: goapiexample
+    ports:
+      - "4000:4000"
+    restart: always
+    environment:
+      - DB_CONNECTION_URL=root:secret@tcp(mysqldb:3306)/book
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    networks:
+      - goapiexample_network
+
+  mysqldb:
+    image: mysql:8.0.29-debian
+    container_name: mysqlforgoexampleapi
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: book
+    networks:
+      - goapiexample_network
+    healthcheck:
+      test: "mysql -uroot -psecret book -e 'select 1'"
+      interval: 10s
+      timeout: 2s
+      retries: 20
+networks:
+  goapiexample_network:
+    driver: bridge
