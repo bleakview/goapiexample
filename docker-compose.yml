@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   golang:
-    image: goapiexample:latest
+    image: bleakview/goapiexample:1.0.0
     container_name: goapiexample
     ports:
       - "4000:4000"
