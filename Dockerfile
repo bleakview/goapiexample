@@ -1,4 +1,4 @@
-FROM golang:1.18.2-buster
+FROM golang:1.18.2-buster AS builder
 
 WORKDIR /src
 
@@ -7,6 +7,10 @@ COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 
 COPY . .
-RUN go build -v -o /usr/local/bin/app cmd/goapiexample/main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -installsuffix cgo -ldflags '-extldflags "-static"' -v -o /src/app cmd/goapiexample/main.go
 
-CMD ["app"]
+FROM alpine:3.16
+WORKDIR /root/
+COPY --from=builder /src/app ./
+
+CMD ["./app"]
