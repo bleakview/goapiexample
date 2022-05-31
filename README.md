@@ -1,7 +1,9 @@
+[![Go CI](https://github.com/bleakview/goapiexample/actions/workflows/go_ci.yml/badge.svg)](https://github.com/bleakview/goapiexample/actions/workflows/go_ci.yml)   [![publish to docker registry](https://github.com/bleakview/goapiexample/actions/workflows/push_to_docker_hub.yml/badge.svg)](https://github.com/bleakview/goapiexample/actions/workflows/push_to_docker_hub.yml)
+
 # GOApiExample
 
 Hi ! This is an example written in golang for a start point on how to write a Gorilla with Gorm.
-It supports testing with jest and you can test api with swagger via http://localhost:\<port>/docs/.
+It supports testing and you can test api with swagger via http://localhost:\<port>/docs/.
 If you invoke docker with docker run --name goapiexample -d -p 4000:4000 bleakview/goapiexample:1.0.0 you can reach swagger with http://localhost:4000/docs/
 If you directly run docker container it will use sqlite.
 You can use docker compose it will start app with mysql.
